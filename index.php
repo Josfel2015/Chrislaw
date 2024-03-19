@@ -46,7 +46,7 @@
         <!-- Main Content -->
         <div class="card-grid" >
             <div class="food-list" id="food-list">
-                <p id="none" style="display: none;">Sorry, the recipe you were looking for was not available.</p>
+                <p id="none" style="display: none;">Sorry, the recipe you are looking for is not available.</p>
                 <div class="card card-shadow">
                     <div class="card-header card-image">
                         <img src="./img/Sisig.webp">
