@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="./img/Chrislaw.PNG" type="image/x-icon">
+        <link rel="shortcut icon" href="img/Chrislaw.PNG" type="image/x-icon">
         <link rel="stylesheet" href="./assets/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
         <title>Chrislaw</title>
@@ -23,10 +23,9 @@
                 <div class="menu-bar">
                     <ul>
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li><a href="about.php">About</a></li>
+                        <li><a href="contactus.php">Contact</a></li>
+                        <li><a href="login.php">Login/Register</a></li>
                     </ul>
                 </div>
             </nav>
@@ -47,13 +46,13 @@
         <!-- Main Content -->
         <div class="card-grid" >
             <div class="food-list" id="food-list">
-                <p id="none" style="display: none;">Sorry, the recipe you are looking for is not available.</p>
+                <p id="none" style="display: none;">Sorry, the recipe you were looking for was not available.</p>
                 <div class="card card-shadow">
                     <div class="card-header card-image">
                         <img src="./img/Sisig.webp">
                     </div>
                     <div class="card-body" >
-                        <h3> Sisig </h3>
+                        <h3> Sisig Dinner</h3>
                     </div>
                     <div class="card-footer">
                         <button class="btn" onclick="getRecipeDetails()">View Recipe</button>
@@ -367,10 +366,9 @@
         </div>
         <div class="quick-bar">
             <a href="index.php">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+            <a href="about.php">About</a>
+            <a href="contactus.php">Contact</a>
+            <a href="login.php">Login/Register</a>
         </div>
         <p>Copyright &copy; <?php echo date('Y') ?> Chrislaw. All right reserved</p>  
     </div>
