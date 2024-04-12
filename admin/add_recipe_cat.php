@@ -1,4 +1,24 @@
-﻿<!DOCTYPE html>
+﻿<?php 
+    include('check_user.php');
+    require_once('../db/db_connection.php');
+    if (isset($_POST['submit'])) {
+        $recipe_cat = $_POST['recipe_cat'];
+        $sql = "INSERT INTO reci_cat(recipe_cat)VALUES(?)";
+        $qry = $conn->prepare($sql);
+        $qry->bind_param('s',$recipe_cat);
+        $qry->execute();
+        if ($qry) {
+            echo "
+            <script>alert('Recipe Category Added')</script>
+            ";
+        }else {
+            echo "<script>alert('Please check your connection')</script>";
+        }
+    }
+?>
+
+
+<!DOCTYPE html>
 <html>
 <head>
       <meta charset="utf-8" />
@@ -30,13 +50,13 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <form role="form">
+                                    <form role="form" method="post" action="add_recipe_cat.php">
                                         <div class="form-group">
                                             <label>Enter Recipe Category</label>
-                                            <input type="text" class="form-control" placeholder="PLease Enter Recipe Category" />
+                                            <input type="text" name="recipe_cat" class="form-control" placeholder="PLease Enter Recipe Category" required/>
                                         </div>
-                                        <button type="submit" class="btn btn-default">Submit Button</button>
-                                        <button type="reset" class="btn btn-primary">Reset Button</button>
+                                        <input type="submit" name="submit" class="btn btn-success">
+                                        <input type="reset" class="btn btn-primary">
                                     </form>
                                 </div>
                             </div>
@@ -60,7 +80,5 @@
     <script src="assets/js/jquery.metisMenu.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-    
-   
 </body>
 </html>
