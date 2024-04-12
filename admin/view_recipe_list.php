@@ -1,4 +1,22 @@
-﻿<!DOCTYPE html>
+﻿<?php 
+    include('check_user.php');
+    require_once('../db/db_connection.php');
+    if (isset($_GET['del'])) {
+        $id = $_GET['del'];
+        $sql = "DELETE FROM reci_list WHERE id=?";
+        $qry = $conn->prepare($sql);
+        $qry->bind_param('i',$id);
+        $qry->execute();
+        $qry->close();
+        if ($qry) {
+            echo "<script>alert('Recipe Deleted')</script>";
+        }else {
+            echo "<script>alert('Please Check your connection')</script>";
+        }
+
+    }
+?>
+<!DOCTYPE html>
 <html>
 <head>
       <meta charset="utf-8" />
@@ -35,36 +53,29 @@
                                     <thead>
                                         <tr>
                                             <th>S/N</th>
+                                            <th>Recipe Category</th>
                                             <th>Recipe Name</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX">
-                                            <td>1</td>
-                                            <td>Links</td>
-                                            <td class="center">X</td>
+                                    <?php
+                                      $sql = "SELECT * FROM reci_list";
+                                      $qry = $conn->prepare($sql);
+                                      $qry->execute();
+                                      $res = $qry->get_result();
+                                      $cnt = 1;
+                                      while ($row=$res->fetch_object()) {
+                                        ?>
+                                      
+                                        <tr>
+                                            <td><?php echo $cnt++?></td>
+                                            <td><?php echo $row->recipe_cat?></td>
+                                            <td><?php echo $row->recipe_name?></td>
+                                            <td class="center"><a href="view_recipe_list.php?del=<?php echo $row->id?>"><button class="btn btn-danger">Delete</button></a></td>
                                         </tr>
-                                        <tr class="gradeX">
-                                            <td>2</td>
-                                            <td>Lynx</td>
-                                            <td class="center">X</td>
-                                        </tr>
-                                        <tr class="gradeC">
-                                            <td>3</td>
-                                            <td>IE Mobile</td>
-                                            <td class="center">C</td>
-                                        </tr>
-                                        <tr class="gradeC">
-                                            <td>4</td>
-                                            <td>PSP browser</td>
-                                            <td class="center">C</td>
-                                        </tr>
-                                        <tr class="gradeU">
-                                            <td>5</td>
-                                            <td>All others</td>
-                                            <td class="center">U</td>
-                                        </tr>
+                                        <?php }
+                                            ?>
                                     </tbody>
                                 </table>
                             </div>
