@@ -1,4 +1,4 @@
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -24,17 +24,20 @@
                         <a class="active-menu"  href="index.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="view_recipe_cat.php"><i class="fa fa-table"></i> View Recipe Cat</a>
+                        <a href="add_recipe_cat.php"><i class="fa fa-edit"></i> Add Recipe Category</a>
+                    </li>
+                    <li>
+                        <a href="view_recipe_cat.php"><i class="fa fa-table"></i> View Recipe Category</a>
+                    </li>
+                    <li>
+                        <a href="add_recipe_list.php"><i class="fa fa-edit"></i> Add Recipe list </a>
                     </li>
                     <li>
                         <a href="view_recipe_list.php"><i class="fa fa-table"></i> View Recipe List</a>
                     </li>
                     <li>
-                        <a href="add_recipe_cat.php"><i class="fa fa-edit"></i> Add Recipe cat </a>
-                    </li>	
-                    <li>
-                        <a href="add_recipe_list.php"><i class="fa fa-edit"></i> Add Recipe list </a>
-                    </li>				                
+                        <a href="view_comment.php"><i class="fa fa-table"></i> View Comment</a>
+                    </li>
                 </ul>
                
             </div>
