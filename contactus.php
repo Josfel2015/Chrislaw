@@ -1,3 +1,22 @@
+<?php
+    require_once('db/db_connection.php');
+    if (isset($_POST['send'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $message = $_POST['message'];
+
+        $sql = "INSERT INTO comments(name,email,comments)VALUES(?,?,?)";
+        $qry = $conn->prepare($sql);
+        $stmt = $qry->bind_param('sss',$name,$email,$message);
+        $qry->execute();
+        if ($qry) {
+            echo "<script>alert('We have recieved your message')</script>";
+        }else {
+            echo "<script>alert('Please check your connection')</script>";
+        }
+
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +28,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-       <style>
+        <style>
             .header-login{
                 height: 80px;
             }
@@ -97,10 +116,9 @@
             }
 
             .overlay {
-                background: #ff4b2bb5;
+                background: #f4eeef;
                 background-size: cover;
                 background-position: 0 0;
-                color: #FFFFFF;
                 position: relative;
                 left: -100%;
                 height: 100%;
@@ -128,9 +146,6 @@
             h1,a,span{
                 color: #1c2541;
             }
-            p{
-                color: #FFFFFF;
-            }
 
         </style>
         <script>
@@ -152,50 +167,36 @@
 
             }
         </script>
-        <title>Chrislaw</title>
+        <title>Chrislaw Contact</title>
+    
     </head>
     <body>
 
         <!--- Header -->
         <div class="header-login">
-            <nav class="nav-bar">
-                <img src="./img/Chrislaw.PNG" class="brand-name">
-                <a href="#" class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </a>
-                <div class="menu-bar">
-                    <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="about.php">About</a></li>
-                        <li><a href="contactus.php">Contact</a></li>
-                        <li><a href="login.php">Login/Register</a></li>
-                    </ul>
-                </div>
-            </nav>
+            <?php include('navbar.php')?>
             <!-- Search Bar -->
         </div>
         
         <!-- Main Content -->
 <div class="container" id="container">
 	<div class="form-container sign-in-container">
-		<form action="" method="POST" name="contactform" onsubmit="return validatecontactform()">
+		<form action="contactus.php" method="POST" name="contactform" onsubmit="return validatecontactform()">
 			<h1>Send a request</h1>
             <input type="text" placeholder="Name" name="name" id="name"/>
             <input type="email" placeholder="Email" name="email" id="email"/>
             <textarea rows="8" cols="45" placeholder="Message" name="message" id="msg"></textarea>
-            <input type="submit" value="Send" name="login" class="button"/>
+            <input type="submit" value="Send" name="send" class="button"/>
 		</form>
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-right">
 				<h1>Contact Information</h1>
-				<p><span><i class="fas fa-map-marker-alt"></i></span> ghana school</p>
-                <p><span><i class="fas fa-envelope"></i></span> joseph@gmail.com</p>
-                <p><span><i class="fas fa-phone-alt"></i></span> +234 812 3323 345</p>
-                <div class="social-btn">
+				<p style="color: #FF4B2B;"><span><i class="fas fa-map-marker-alt"></i></span> Lagos, Nigeria</p>
+                <p style="color: #FF4B2B;"><span><i class="fas fa-envelope"></i></span>  josepholojede@gmail.com</p>
+                <p style="color: #FF4B2B;"><span><i class="fas fa-phone-alt"></i></span> +234 703 232 8237</p>
+                <div class="contact-social-btn">
                     <a href="https://www.facebook.com/Chrislaw taste" target="_blank" ><i class="fab fa-facebook"></i></a>
                     <a href="https://www.instagram.com/Chrislaw taste/" target="_blank" ><i class="fab fa-instagram"></i></a>
                     <a href="https://www.linkedin.com/in/Chrislaw taste/" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -217,7 +218,7 @@
         </div>
         <div class="quick-bar">
             <a href="index.php">Home</a>
-            <a href="about.php">About</a>
+            <a href="about.php">About Us</a>
             <a href="contactus.php">Contact</a>
             <a href="login.php">Login/Register</a>
         </div>
