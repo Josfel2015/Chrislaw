@@ -6,10 +6,11 @@
         $full_name = $_POST['full_name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $role = 'chef';
 
-        $sql = "INSERT INTO users(name,email,password)VALUES(?,?,?)";
+        $sql = "INSERT INTO users(name,email,password,role)VALUES(?,?,?,?)";
         $stmt = $conn->prepare($sql);
-        $res = $stmt->bind_param('sss',$full_name,$email,$password);
+        $res = $stmt->bind_param('ssss',$full_name,$email,$password,$role);
         $stmt->execute();
         if ($sql) {
             echo "<script>alert('Successfully registered')</script>";
@@ -36,6 +37,10 @@
                 if ($role=='admin') {
                     echo "<script>alert('welcome to the admin page');
                     window.location='admin/'
+                    </script>";
+                }else {
+                    echo "<script>alert('welcome to Chef page');
+                    window.location='chef/'
                     </script>";
                 }
             }
@@ -154,11 +159,9 @@
             }
 
             .overlay {
-                background: #ff4b2bb5;
-                background-repeat: no-repeat;
+                background: #f4eeef;                background-repeat: no-repeat;
                 background-size: cover;
                 background-position: 0 0;
-                color: #FFFFFF;
                 position: relative;
                 left: -100%;
                 height: 100%;
@@ -253,30 +256,14 @@
 
         <!--- Header -->
         <div class="header-login">
-            <nav class="nav-bar">
-                <img src="./img/Chrislaw.PNG" class="brand-name">
-                <a href="#" class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </a>
-                <div class="menu-bar">
-                    <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="about.php">About</a></li>
-                        <li><a href="contactus.php">Contact</a></li>
-                        <li><a href="login.php">Login/Register</a></li>
-                    </ul>
-                </div>
-            </nav>
+            <?php include('navbar.php')?>
             <!-- Search Bar -->
-            
         </div>
         
         <!-- Main Content -->
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form action="" method="POST" name="regform" onsubmit="return validateregform()">
+		<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" name="regform" onsubmit="return validateregform()">
 			<h1>Create Account</h1>
 			<span>or use your email for registration</span>
 			<input type="text" placeholder="Name" name="full_name" id="fname"/>
@@ -287,7 +274,7 @@
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="" method="POST" name="logform" onsubmit="return validatelogform()">
+		<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" name="logform" onsubmit="return validatelogform()">
 			<h1>Sign in</h1>
 			<span>or use your account</span>
 			<input type="email" placeholder="Email" name="email" id="email"/>
@@ -300,12 +287,12 @@
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
 				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
+				<p style="color: #FF4B2B;">To keep connected with us please login with your personal info</p>
 				<button id="signIn" class="button">Sign In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
+				<p style="color: #FF4B2B;">Enter your personal details and start a journey with us</p>
 				<button id="signUp" class="button">Sign Up</button>
 			</div>
 		</div>
@@ -323,7 +310,7 @@
         </div>
         <div class="quick-bar">
             <a href="index.php">Home</a>
-            <a href="about.php">About</a>
+            <a href="about.php">About Us</a>
             <a href="contactus.php">Contact</a>
             <a href="login.php">Login/Register</a>
         </div>
