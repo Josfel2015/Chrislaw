@@ -1,9 +1,6 @@
 ﻿<?php 
     // error_reporting(0);
-    session_start();
-    if (!isset($_SESSION['password'])) {
-        header("location:../");
-    }
+    include('check_user.php');
     $myid = $_SESSION['id'];
     require_once('../db/db_connection.php');
     $sql = "SELECT * FROM users WHERE id='$myid'";
@@ -11,7 +8,6 @@
     if ($stmt->num_rows > 0) {
         while ($row = $stmt->fetch_assoc()) {
             $name = $row['name'];
-            $id = $row['id'];
             // $conn->close();
 ?>
 <!DOCTYPE html>
@@ -51,40 +47,52 @@
                             <span class="icon-box bg-color-red set-icon">
                                 <i class="fa fa-user"></i>
                             </span>
+                            <?php 
+                                $sql1 = "SELECT COUNT(*) FROM users where role = 'chef'";
+                                $qry1 = $conn->prepare($sql1);
+                                $qry1->execute();
+                                $qry1->bind_result($users);
+                                $qry1->fetch();
+                                $qry1->close();
+                            ?>
                             <div class="text-box" >
-                                <p class="main-text"><?php echo $id++;?> Users</p>
+                                <p class="main-text"><?php echo $users;?><br><br>Chef</p>
                             </div>
                         </div>
 		            </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">           
                         <div class="panel panel-back noti-box">
                             <span class="icon-box bg-color-green set-icon">
-                                <i class="fa fa-bars"></i>
+                                <i class="fa fa-list-alt"></i>
                             </span>
+                            <?php 
+                                $sql1 = "SELECT COUNT(*) FROM reci_cat";
+                                $qry1 = $conn->prepare($sql1);
+                                $qry1->execute();
+                                $qry1->bind_result($recipe_cat);
+                                $qry1->fetch();
+                                $qry1->close();
+                            ?>
                             <div class="text-box" >
-                                <p class="main-text"><?php echo $id++;?> Users</p>
+                                <p class="main-text"><?php echo $recipe_cat;?> Category</p>
                             </div>
                         </div>
 		            </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">           
 			<div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-blue set-icon">
-                    <i class="fa fa-bell-o"></i>
+                    <i class="fa fa-cutlery"></i>
                 </span>
+                <?php 
+                                $sql1 = "SELECT COUNT(*) FROM reci_list";
+                                $qry1 = $conn->prepare($sql1);
+                                $qry1->execute();
+                                $qry1->bind_result($recipe_list);
+                                $qry1->fetch();
+                                $qry1->close();
+                            ?>
                 <div class="text-box" >
-                    <p class="main-text">240 New</p>
-                    <p class="text-muted">Notifications</p>
-                </div>
-             </div>
-		     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
-                <span class="icon-box bg-color-brown set-icon">
-                    <i class="fa fa-rocket"></i>
-                </span>
-                <div class="text-box" >
-                    <p class="main-text">3 Orders</p>
-                    <p class="text-muted">Pending</p>
+                    <p class="main-text"><?php echo $recipe_list?> Recipe List</p>
                 </div>
              </div>
 		     </div>
